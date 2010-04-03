@@ -1,0 +1,7 @@
+# anjuta's files
+# yes, i use anjuta
+
+.anjuta/
+*.anjuta
+.anjuta_sym_db.db
+.cvsignore
