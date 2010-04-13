@@ -5,3 +5,12 @@
 *.anjuta
 .anjuta_sym_db.db
 .cvsignore
+autom4te*
+Debug
+
+# binary
+scrum-clock
+*.o
+
+# tmp files
+*~

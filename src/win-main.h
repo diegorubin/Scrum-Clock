@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*- */
 /*
- * main.cc
- * Copyright (C) Diego Rubin 2010 <rubin.diego@gmail.com>
+ * scrum-clock
+ * Copyright (C)  2010 <>
  * 
  * scrum-clock is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -17,26 +17,21 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef _WIN_MAIN_H_
+#define _WIN_MAIN_H_
+
 #include <gtkmm.h>
-#include <iostream>
-#include "win-main.h"
 
-#ifdef ENABLE_NLS
-#  include <libintl.h>
-#endif
-
-
-/* For testing propose use the local (not installed) ui file */
-/* #define UI_FILE PACKAGE_DATA_DIR"/scrum_clock/ui/scrum_clock.ui" */
-#define UI_FILE "src/scrum_clock.ui"
-   
-int
-main (int argc, char *argv[])
+class WinMain: public Gtk::Window 
 {
-	Gtk::Main kit(argc, argv);
-	
-	WinMain main_win;
-	
-	Gtk::Main::run(main_win);
-	return 0;
-}
+public:
+	WinMain();
+	virtual ~WinMain();
+
+protected:
+
+private:
+
+};
+
+#endif // _WIN_MAIN_H_

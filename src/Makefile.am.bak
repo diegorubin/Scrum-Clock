@@ -19,8 +19,7 @@ bin_PROGRAMS = scrum_clock
 
 scrum_clock_SOURCES = \
 	main.cc      \
-	win-main.h      \
-	win-main.cc
+	win-main.h
 
 scrum_clock_LDFLAGS = 
 
