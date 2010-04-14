@@ -23,7 +23,58 @@ WinMain::WinMain()
 {
 	showed = false;
 
+	set_position(Gtk::WIN_POS_MOUSE);
+	set_title("Scrum Clock");
+	set_default_size(400,600);
 
+	add(vbxMenu);
+	
+	//cria o menu principal
+	
+	actMenu = Gtk::ActionGroup::create();
+	
+	actMenu->add(Gtk::Action::create("FileMenu","Arquivo"));
+	actMenu->add(Gtk::Action::create("FileQuit",Gtk::Stock::QUIT),sigc::mem_fun(*this, &WinMain::on_menu_file_quit));
+	
+	uimMenu = Gtk::UIManager::create();
+	uimMenu->insert_action_group(actMenu);
+	
+	add_accel_group(uimMenu->get_accel_group());
+	
+	Glib::ustring ui_info =
+		"<ui>"
+		"	<menubar name='MenuBar'>"
+		" 		<menu action='FileMenu'>"
+		" 			<separator/>"
+		" 			<menuitem action='FileQuit'/>"
+		" 		</menu>"
+		"	</menubar>"
+		"</ui>";
+	
+	#ifdef GLIBMM_EXCEPTIONS_ENABLED
+	try
+	{
+		uimMenu->add_ui_from_string(ui_info);
+	}
+	catch(const Glib::Error& ex)
+	{
+		std::cerr << "building menus failed: " << ex.what();
+	}
+	#else
+	std::auto_ptr<Glib::Error> ex;
+	uimMenu->add_ui_from_string(ui_info, ex);
+	if(ex.get())
+	{
+		std::cerr << "building menus failed: " << ex->what();
+	}
+	#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+	
+	Gtk::Widget* MainMenu = uimMenu->get_widget("/MenuBar");
+	if(MainMenu)
+		vbxMenu.pack_start(*MainMenu, Gtk::PACK_SHRINK);
+
+	show_all_children();
 	hide();
 }
 
@@ -38,6 +89,7 @@ void WinMain::set_systray(Glib::RefPtr<Gtk::StatusIcon> tray)
 	systray->signal_activate().connect(sigc::mem_fun(*this,&WinMain::on_systray_activate));
 }
 
+// callbacks implementations
 void WinMain::on_systray_activate()
 {
 	if(showed){
@@ -49,4 +101,9 @@ void WinMain::on_systray_activate()
 		showed = true;
 		show();
 	}
+}
+
+void WinMain::on_menu_file_quit()
+{
+	Gtk::Main::quit();
 }

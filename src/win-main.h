@@ -20,7 +20,10 @@
 #ifndef _WIN_MAIN_H_
 #define _WIN_MAIN_H_
 
+#include <iostream>
 #include <gtkmm.h>
+
+using namespace Gtk;
 
 class WinMain: public Gtk::Window 
 {
@@ -37,8 +40,19 @@ private:
 	bool showed;
 	Glib::RefPtr<Gtk::StatusIcon> systray;
 
+	// main menu
+	Glib::RefPtr<Gtk::ActionGroup> actMenu;
+	Glib::RefPtr<Gtk::UIManager> uimMenu;
+	Glib::RefPtr<Gtk::ListStore> treModel;
+
+	// menu widgets
+	VBox vbxMenu;
+	ScrolledWindow slwMain;
+
+
 	// callback methods
 	virtual void on_systray_activate();
+	virtual void on_menu_file_quit();
 	
 };
 
