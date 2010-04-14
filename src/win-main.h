@@ -28,10 +28,18 @@ public:
 	WinMain();
 	virtual ~WinMain();
 
+	void set_systray(Glib::RefPtr<Gtk::StatusIcon> tray);
 protected:
 
 private:
 
+	// attributes
+	bool showed;
+	Glib::RefPtr<Gtk::StatusIcon> systray;
+
+	// callback methods
+	virtual void on_systray_activate();
+	
 };
 
 #endif // _WIN_MAIN_H_

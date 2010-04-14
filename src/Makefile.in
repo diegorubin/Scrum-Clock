@@ -248,8 +248,8 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-#uidir = $(datadir)/scrum_clock/ui
-#ui_DATA = scrum_clock.ui
+uidir = $(datadir)/scrum_clock/ui
+ui_DATA = scrum_clock.ui
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
@@ -267,7 +267,7 @@ scrum_clock_SOURCES = \
 
 scrum_clock_LDFLAGS = 
 scrum_clock_LDADD = $(SCRUM_CLOCK_LIBS)
-#EXTRA_DIST = $(ui_DATA)
+EXTRA_DIST = $(ui_DATA)
 all: all-am
 
 .SUFFIXES:

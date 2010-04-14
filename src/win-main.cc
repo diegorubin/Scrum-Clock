@@ -21,9 +21,32 @@
 
 WinMain::WinMain()
 {
-	show();
+	showed = false;
+
+
+	hide();
 }
 
 WinMain::~WinMain()
 {
+}
+
+void WinMain::set_systray(Glib::RefPtr<Gtk::StatusIcon> tray)
+{
+	systray = tray;
+	systray->set_tooltip("Scrum Clock");
+	systray->signal_activate().connect(sigc::mem_fun(*this,&WinMain::on_systray_activate));
+}
+
+void WinMain::on_systray_activate()
+{
+	if(showed){
+		showed = false;
+		hide();
+	}
+	else
+	{
+		showed = true;
+		show();
+	}
 }

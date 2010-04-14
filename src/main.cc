@@ -25,18 +25,18 @@
 #  include <libintl.h>
 #endif
 
-
-/* For testing propose use the local (not installed) ui file */
-/* #define UI_FILE PACKAGE_DATA_DIR"/scrum_clock/ui/scrum_clock.ui" */
-#define UI_FILE "src/scrum_clock.ui"
    
 int
 main (int argc, char *argv[])
 {
+	std::string home = getenv("HOME");
+	
 	Gtk::Main kit(argc, argv);
+	Glib::RefPtr<Gtk::StatusIcon> systray = Gtk::StatusIcon::create_from_file(home + "/.scrum-clock/icon.jpg");
 	
-	WinMain main_win;
-	
-	Gtk::Main::run(main_win);
+	WinMain winMain;
+	winMain.set_systray(systray);
+		
+	kit.run();
 	return 0;
 }
